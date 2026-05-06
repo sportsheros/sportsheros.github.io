@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jeet Beniwal — Lead Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #17171f;
+    --card: #1c1c26;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #7c6ef2;
+    --accent2: #5de0b8;
+    --accent3: #f0845a;
+    --text: #f0eeff;
+    --muted: #8885a8;
+    --muted2: #5c5a72;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 60px;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); font-size: 13px; text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 7rem 2.5rem 4rem;
+    max-width: 1100px; margin: 0 auto;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent2); font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .hero-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--accent2); }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.75rem 1.75rem; border-radius: 100px;
+    font-size: 14px; font-weight: 500; text-decoration: none;
+    transition: all 0.2s; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #6a5ee0; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--text); border: 0.5px solid var(--border2); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2rem; border-top: 0.5px solid var(--border);
+  }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--text); }
+  .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; margin-top: 2px; }
+
+  /* SECTION LAYOUT */
+  section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700; letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-photo-placeholder {
+    aspect-ratio: 4/5; border-radius: 16px;
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; color: var(--muted2); font-size: 13px;
+    position: relative; overflow: hidden;
+  }
+  .photo-initials {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: #fff;
+  }
+  .about-text p { color: var(--muted); margin-bottom: 1.25rem; font-weight: 300; line-height: 1.8; }
+  .contact-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 12px; }
+  .contact-list li a { color: var(--muted); text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 10px; transition: color 0.2s; }
+  .contact-list li a:hover { color: var(--accent2); }
+  .contact-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--bg3); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon svg { width: 16px; height: 16px; fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  .skill-chip {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 10px; padding: 0.75rem 1rem;
+    font-size: 13px; font-weight: 500; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-chip:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .skill-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .timeline-item { position: relative; margin-bottom: 3rem; }
+  .timeline-dot {
+    position: absolute; left: -2rem; top: 6px;
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+  }
+  .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+  .timeline-role { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; }
+  .timeline-company { color: var(--accent2); font-size: 14px; font-weight: 500; margin-bottom: 0.25rem; }
+  .timeline-date { font-size: 12px; color: var(--muted2); letter-spacing: 0.04em; white-space: nowrap; }
+  .timeline-body { color: var(--muted); font-size: 14px; font-weight: 300; }
+  .timeline-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+  .tag { font-size: 11px; padding: 3px 10px; border-radius: 100px; background: var(--bg3); border: 0.5px solid var(--border2); color: var(--muted); letter-spacing: 0.04em; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .project-card {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 16px; padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .project-card.featured { grid-column: span 2; }
+  .project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+  .project-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+  .project-num { font-family: 'Syne', sans-serif; font-size: 0.75rem; color: var(--muted2); font-weight: 700; letter-spacing: 0.08em; }
+  .project-title { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .project-role { font-size: 12px; color: var(--accent2); font-weight: 500; margin-bottom: 0.75rem; letter-spacing: 0.04em; }
+  .project-desc { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; flex: 1; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.25rem; }
+  .stack-badge { font-size: 11px; padding: 3px 10px; border-radius: 100px; background: rgba(124,110,242,0.1); border: 0.5px solid rgba(124,110,242,0.25); color: var(--accent); }
+
+  /* ACHIEVEMENTS */
+  .achievements { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .achieve-card { background: var(--card); border: 0.5px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; }
+  .achieve-card h4 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .achieve-card p { font-size: 13px; color: var(--muted); font-weight: 300; }
+  .achieve-num { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--accent2); line-height: 1; margin-bottom: 0.25rem; }
+
+  /* EDUCATION */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .edu-card { background: var(--card); border: 0.5px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+  .edu-degree { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .edu-school { color: var(--accent2); font-size: 14px; font-weight: 500; margin-bottom: 0.25rem; }
+  .edu-year { font-size: 12px; color: var(--muted2); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 3rem 2.5rem;
+    border-top: 0.5px solid var(--border);
+    color: var(--muted2); font-size: 13px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* DIVIDER */
+  .section-divider { height: 0.5px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+  /* TYPING CURSOR */
+  .hero-tag { animation: fadeInDown 0.6s ease both; }
+  .hero h1 { animation: fadeInUp 0.7s ease 0.1s both; }
+  .hero-sub { animation: fadeInUp 0.7s ease 0.2s both; }
+  .hero-cta { animation: fadeInUp 0.7s ease 0.3s both; }
+  .hero-stats { animation: fadeInUp 0.7s ease 0.4s both; }
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeInDown { from { opacity:0; transform:translateY(-16px); } to { opacity:1; transform:translateY(0); } }
+
+  /* SECTION FADE IN */
+  section { animation: fadeInUp 0.5s ease both; }
+
+  /* ABOUT PHOTO wrapper */
+  .about-photo-wrapper { padding: 1rem 0; }
+
+  /* BETTER TIMELINE */
+  .timeline-body ul { margin: 0.5rem 0 0 1rem; }
+  .timeline-body ul li { color: var(--muted); font-size: 14px; font-weight: 300; margin-bottom: 4px; }
+
+  /* SKILL CATEGORY LABEL */
+  .skill-category { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted2); font-weight: 500; margin: 1.5rem 0 0.75rem; grid-column: 1/-1; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.25rem 3rem; }
+    .hero-stats { gap: 1.5rem; }
+    section { padding: 4rem 1.25rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-photo-placeholder { aspect-ratio: 1; max-height: 280px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; }
+    .edu-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">JB</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Available for senior roles</div>
+  <h1>Jeet<br /><span>Beniwal</span></h1>
+  <p class="hero-sub">Lead Engineer · 8+ years of crafting scalable backend systems, real-time platforms &amp; cloud-native microservices with Node.js &amp; TypeScript.</p>
+  <div class="hero-cta">
+    <a href="https://www.linkedin.com/in/jeet-beniwal-3934aa10a/" target="_blank" class="btn btn-primary">LinkedIn Profile ↗</a>
+    <a href="https://github.com/sportsheros" target="_blank" class="btn btn-outline">GitHub ↗</a>
+    <a href="mailto:jeetbeniwal231@gmail.com" class="btn btn-outline">jeetbeniwal231@gmail.com</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">8+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div>
+      <div class="stat-num">4</div>
+      <div class="stat-label">Companies</div>
+    </div>
+    <div>
+      <div class="stat-num">8</div>
+      <div class="stat-label">Major Projects</div>
+    </div>
+    <div>
+      <div class="stat-num">10</div>
+      <div class="stat-label">Team Members Led</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-tag">01 — About</div>
+  <div class="section-title">Who I am</div>
+  <div class="about-grid">
+    <div class="about-photo-wrapper" style="display:flex; align-items:center; justify-content:center; padding: 2rem 0;">
+      <div style="position:relative; display:inline-block;">
+        <!-- Outer decorative ring -->
+        <div style="width:300px; height:300px; border-radius:50%; padding:4px; background: conic-gradient(from 180deg, #7c6ef2, #5de0b8, #f0845a, #7c6ef2); position:relative;">
+          <!-- White gap ring -->
+          <div style="width:100%; height:100%; border-radius:50%; padding:3px; background:#0a0a0f;">
+            <!-- Photo circle -->
+            <div style="width:100%; height:100%; border-radius:50%; overflow:hidden;">
+              <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/7QBsUGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAE8cAigASkZCTUQwZjAwMDc3NDAzMDAwMGVkMGIwMDAwZDkxMzAwMDAzYTE1MDAwMGI4MTYwMDAwNjMxOTAwMDBkYzI4MDAwMDBkMjkwMDAwAP/iAhxJQ0NfUFJPRklMRQABAQAAAgxsY21zAhAAAG1udHJSR0IgWFlaIAfcAAEAGQADACkAOWFjc3BBUFBMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD21gABAAAAANMtbGNtcwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACmRlc2MAAAD8AAAAXmNwcnQAAAFcAAAAC3d0cHQAAAFoAAAAFGJrcHQAAAF8AAAAFHJYWVoAAAGQAAAAFGdYWVoAAAGkAAAAFGJYWVoAAAG4AAAAFHJUUkMAAAHMAAAAQGdUUkMAAAHMAAAAQGJUUkMAAAHMAAAAQGRlc2MAAAAAAAAAA2MyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHRleHQAAAAARkIAAFhZWiAAAAAAAAD21gABAAAAANMtWFlaIAAAAAAAAAMWAAADMwAAAqRYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9jdXJ2AAAAAAAAABoAAADLAckDYwWSCGsL9hA/FVEbNCHxKZAyGDuSRgVRd13ta3B6BYmxmnysab9908PpMP///9sAQwALCAgKCAcLCgkKDQwLDREcEhEPDxEiGRoUHCkkKyooJCcnLTJANy0wPTAnJzhMOT1DRUhJSCs2T1VORlRAR0hF/9sAQwEMDQ0RDxEhEhIhRS4nLkVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVF/8IAEQgB4AFoAwEiAAIRAQMRAf/EABsAAAMAAwEBAAAAAAAAAAAAAAABAgMEBQYH/8QAGAEBAQEBAQAAAAAAAAAAAAAAAAECAwT/2gAMAwEAAhADEAAAAPV9Hhd3Omqcs0mgAACgCACgNENDaJW0VSGSwEwGhjACKRnqHTQIAAFADAA8l3eT1huXK2hGJgIGJgAoAAAVNAAMQMQMTGCG0CVBkqXTE0BMbllAAAnIzxc0xCFS1bTABJYwAUBDBBcWAmAIYAxMaGAAwCmmMRQCh1LTIRdABzalysAGmUSxiIAQ0AxMSYUBTFQIAAVgxNMbmkABtBQAAA0wadjEHNoIpyxsJQEFoAkGpiM6wxWy9SDfXOR03ySuscZHbOEq7z8/J6E82k9OeVxnrzxiX2leIhPdPwSr3x4P10bwEpSEYitACH5L1fgKqOU9438eoWbMYmXMosTKSCiWNoh1INoKERkUpMlRSkkVVY8jWVwy6h2X73wP0DOt4DGmOaYhNARm4fEe28Rc8dy+vOhAVKWkBRFlJBTTkKmhggBFuDK1IZKgVqC2yaXLcVTvGzJ9C+d/Rc62nNStoQEHNavN1/Hex8innhHXm3KS5ktohpkrG5arHY7irGBDchSEo5eTIZkEVJGRp5MdmUmldRRX0b5x9Gzdqoa2BYCDmtGbj8l63y0eVoOvFIQ0Kk4qMjxUZaiigEqcPNb34wZc6y5uejqGHMyXFJbStxZMNrd4ql2KxZQcUX9H+a/SprYaVXWNyWIrmAs2PN+j8+eNIvpwSQUilxtUjaZdY6TJhrmXWus0563mWOJhRZubfJyG+tfalzZtW0usVpV47XNeKzI4u2vpfzP6ZGUHCKSgxNCaS4+D3uLHgyTpxaEWTQ6kShCMWqY9bVbt01zyXNjxuyrXRzec9nTrobmlnlvVwYU62bmb6ZrxZDNkw2ZhCv6f8v8AqBlJoppwAHPQ1xczqcuPnIn05SU2SpCnDG8Ylcjocdu4snS+n1fScPV43oe1208vveghPKeK+sedl8Dvaev24ZcFTrGfoc/cNvLrZ4zVjsyuKtr6f8v+oxkpMoTGIOekKuf0NCPmaqd8gBluUUpYqi40dHNr3b7vF9ry9HY6upvcO+znw5unKpC5w6HQwY6eI8h9P+ddOekNduGXoc7flz7GptxkuGuWseSn9S+W/U4upIbmqYBzXNKaW3px80x5sG+dmNssBAponULwsdJvp+r4Xp/P68SfNl7/AKDwvq46fPryh6CPP9XWdzxnruFL4ybn0+SujzenNZs+vsRlqaW7x1Zl+pfLPqMt1NA0LQhOemg1NrWl+c6W9o75gCVWOkusORKkDjYN/Qb9b6Pi+s83s4mt6jIaWd7Gbhx7RZ4jf9KtTncf13Bj5nGXH6fLl6WnvS1lw5oy1Fq6x1Zm+pfKvqsuSooYAxBzxqWdbZwHzzn9Pn65yrmyaagqHZYCY+Z2evntre08B7fh6eosVmDd8/0s3cnjb9nQqTWI816Dwx5Q9Tx+uMeVXebyY8kXcXRU1VfVPlf1OXNWOlsTQAOcIlWLLiPA8/o87WFLdzIOWShBzVj9T5bpY6Ze557s8PZ1c+hpxsYeX01zdXgXc+ljTbMeZ7uiuz4v03luvFVL3zMmOzJU2qyY7rJ9R+XfT42BNW0IxBz3juFjrGvhuV1+RrAKbLQSslIXLstzZo+w8x2eXp6vI38/Dvr7hz9Xo6+PppzelhUmLwnofOduG/huN8qqKKvDlMl47V1NVk+n/Lvp0bdRSgCABzS5hYsmJfFcjq83WMaublMmEkyghrMRdmTYwdXl6NH0njIx0+iZ/JbGXoTja6b/ADvM9rVjQ73E3zwYc2HfGqlhkx2ZLx2Vkx3VfTvmP0yXcGQxFUINACWcebGeF5vV5OsoC4UZJIpUsoUtXhszdzg+h4+niec97wprzq3q68tGtiEy+143qOPbQ8367ztxzMeXF245Bsx5JEu0y7w5KyfTPmn0mXoNErTQAWc0ipcmMk8XyOryNZALhpDQlMtE4TYwaPVl3uxR5vXt4M+XG+UunK8nN1NizBsZEzrmXYTynmfpnzH0efaObn6c9p48kuQV2FMq/pHzf6LL1SXmsTAks5JgUu0sCPKcTr8fWcky7EtTQOpqaRZkhEHZ41r9OnQ7Pk9mLYp50pzxBsY81mNXksxZsHht4PPOPT5wSZefAV1NniZ17JqbNlfQvn/0Ca6zHy1NBUiE4RiqW8bwHluV0uRvM86cVyxBRLpicAMzeu8YTf1vY+P7nPf1g+bdKa9vj+dcpPovB8qb57WCTeXLSAANXTZZGzhdnX+h/M/pmddotY3I5AA8s8RGbEsceX4Hc8v0ypC5GgaEU5ZTQU4qnSAacDQOpFoBAGJp0qQZKx1F1OSsn0/5d9JmvUgsapyUxB4owPFzYXiTy/nO95/plArmhAVLGKlKikbQWJjcsbRVIIoAAAB0NMdTRWTDkMn0b5x7+X2hJjbaQwE+fmlzZfR4jXl81wuvx94ELWbkChMbmgaY2mU4Y2mUTQ3LKAG0UNBSAoQGXFkMnvfAe6l9wVON0SxgHyvien8xJ6ny2/xKwavT5esgFjExsBtMAYVNA0FiYVNDTKppwNlE0ENyWpZkaZftfFewl+hqnjctgAV8218tc75TR9lw950ebtamsg1YNMoAbTBjBpgx0McDCqFQXNQDVA2KMkCpWKlkD13k/US/SxGNgACLPlOpu87Ldy8TX1M/C6uumk/QZDzZ6NL5999Jwn3CuI+yHGfXZyH1SuW+mJzX0kvPrfDRe8GkbirUNuZNVbRWrWxRq3sWYfQcjtS/TBGNlSDJD5jk1MuZmMcmTU3cNb2xhzFUXK7KDJVE3VE2XUu3CbsTqhU6JMjMdN1FU4kpqNtJdOhNhUFVUuAYf//EADIQAAEDAgMGBQQDAAMBAAAAAAEAAgMEEQUQEhQVICEwMRMiMjM0I0BBUAYkQiU1Q1H/2gAIAQEAAQcBiOqd7v0LfT08N9Dv0I6mHek/oR1KFtoP1sTbMb+tHb9aP1o/Wj9xqC1sXixrx4ltEK2qBbZTrbadbfTLeNKt50q3pTLetOt7U63vAt7wrfEa3wxb3W+Ct8vW+ZVvedb0qFvKpK2+pW21C26oVG8yUzXdCsxKaGpfGcWq0cSqytuqijV1BW0TFeJIVqKv92FRfEj6OJ/Pf92ejR/Ej6DisT+V92egFS/Hj6D1invt+7PAOD8qn+PH0HLE/cYfujmOKD48fQcsU/8AP7z8dCD2I+IZOWKjyMPTHAXBq8ZeMhMtXEeAcUPsR9ByxT2hxHovlaxGQuN2iRysuSDrcmHlwXyKHQh9lnQcsT+OetK/Qy/fnzTUbolXUUlitSsSvM1MkuMx0IvZZ0CsRH9Z/Wmf4j7CIq2latNi5351XzDig4pr7r0rVfpRe0zoFV4/rScV+Oab/IemSDtL/wDdfK18u+QTCEWi13P5IP5oHgHDH7bOgVW/Hkyv0pn6WZcldas9JUUWpynhLHK6i8yci9XUbkEEMhwR+23oFVPod07qV+py0opkZcmUupDDnFR4XzTMMYFsTWqpog9iqKYxFROsV4gPJ/fKPugUOOP22dAqq9t3Te7Sw5XTWlz1S0vJRUwTIQ1NYFZWTmqtpw9qljLHLUr5RoIIcUftt6M/oPTqHdgO+VBFq5xMsmIIZlSNuFXU3JEc84z5shwDNnob0Cpeyd6ndGym9w5NGoqjjswJgTUOAoqrZdqqGaZDmz1DIIZjL8hN5NHQKl7KXlK/o/hOOo3VFHqfdsoYdO0VLVvbQocWZIbMk1BF1lJXwxG29KdbxhKMjJWrEYtLw45BN7IIIZDJvqC/HRl7Kf35Oi7mw54ePKmBrBqNaOafOKjSo4tCpTdinNmKWnMpTKOIKOKIcjTtab4o36IJyAuUOSaghwDuE30jov7Kq+VJ0pm6ZDlhbPpqSDWxQwNZE+Olw8snD3xDmYGaQpW6kImlVVNKJ3slpNDGCFsmi2KN/rHOL1oZBDgCZ6R0ZOyrPlycN+GqHYhYdyhamC4XhrSnpg5JyARjuvCVliQvTuTvUcoW/nMcATfQOgU9V3zH9KSPWAnxaJC3DXeQCLtn3cmBOCbm5YlJpp3Ii71o89m5DIcLPQ3ovVd8w9OenD4L0HllLYnIHJ8srX3jqQWqoqpe1O9zhm9yxWQnSyhowA55b5nHos9tvRf2WIfM4rIZhQHXE0vj0Vt2FNKup9DebAx61Rg6YwGjIlSu5LZxU1RTmCCncnodGL2mdF3ZYj8sdOnqfBFjXMqKhoY5NdyTqvzaZ3ang0zY7KobHoTJzCLMnDkXqQqhkYfEWIVDSwMd0ofaZ0XdliXyR0r5Bvg1DHMKe76blFTkplDEt3MPPd0YC2RzFcxytbqVQ/RETE76xJPTg9iPou7LEvkMyPSeNShk5WvdaUYy4Iz1UKZUVEpV7BSAXBusSluy0LT36dP8eLouWJ++zivxBOaW821KhcHMCYQi1pQjaEWhSuAKfP8AiVn0Fpsj06X4sXRd2WJ+6zO2R4gm9wtKqmaXXp618Rs2vbZNrwUMQYpsRa0J1U57lSsv5qgfSRR4RxUnxIei4LFPdZ1G+sIdlWsJTgQtRWorUVqVO3U9U7LBVI+kU5HhHFRn+nD0XLFfcZxfngvkw+cJikj1BTUi2dy2V1r+AbIRFUdMe7W2ClbqbaaAsTuA5Dhofgw8V1qCuE5Yt62dMv1P0Mp/DCj7ZPjXhBeGF4AKZSi92RAKyIXhalVYc4+bty/HRw8/0YeOwyddYt6mdDsnTsanTucsLaHSvT2ckxBWWlWQag3OyaFVSingL5n63kh5ahMg4Hjw74EXHdXRKxbuxDhdMxqdUFOcXZ4bIGVSdzamtyCsrIDOysrhjS7Ea3aZUeBspCbIHcOG/Aj49SuiVih9HA+cBOkc7iaS03o6oTxBNWlAK2QysrKWaOnZqrsTdU+UnjbI5qZMHK+WF/AZwjgPZYn/AJQT5QxOkL+jHI6J16TFWHkyVjwhlpQCfNFGpcXp41PjUr1JK+U36NlHKW8gVhR/ot4RndOWJf5V7NTjc36bXFqFZO1R4tVMQx19lLidRKi8lX60R/GD/BCstK0rSrHK6unLEv8AKld5QPv/AMoHmsFP9HivldO7LET6U4+b9FgPwncV1fJx5LETzYj3+/CCCwD4snFdXyeeSxH/AD+hGX8f9iZA8N1dXTjyWIf5++/HD/HfRPxSy+Gy8dS98oCkfpCrXB1v0Az/AI7/AO/FUtvEVA7TKDfkqqYvkKfe36AZ/wAd96fidzCmZ4b1BUeXS7m8qoHkZ+hGX8f+VJxyxCQKWN0bl+VO68Y+/GQQX8f+eeK+T4w8KakITwWj9HgP/Y8UsvhhbYm1TCjI1wVaPIP0IQWCH/kmcT49YRpE6mkCLHtRu5thE1Mw3WwHdK3Q5bokW6JVumZbpqFumpW6qlbrqluyqW66tbtqlu2rW7qtbvqlsFUtgqlsNStiqVsdStkqFstQtlnWyzLZpls0y2aZbNMtnmWzzLZ5ls0ywmnm29juEHOyMLHKSnjjYTEPptFs7ZWy0qy0qy0q3BZaVZWVlZWWlWysrK3Dfh1IFa147EJQVUH6ab2zH6T/xAAiEQEAAgEEAwEBAQEAAAAAAAABABEgAhAhMQMwQEESUWD/2gAIAQIBAT8AeH53v/jOZzOdqZTKZTKZTKZTErEBeZRKJRK92rE7yvB9GrE79TubMuXHE79C+p9j6321soQbM3L8yuuZq1q8QV7YkNTpYc8kMXFz8jRUIbM8Ts4OLDrLW8wH/IvMHmNTQ1q42cHFh1lq5YKR5YdxWHZs4OLDrHU1NXcuDzO9gthqt2d3I6x1lnE1Cdwve4L+TQUYuR1l5SXUGLERqaCi8DZyOsvJ3HTZZKT8n8rErlmhycjrLyM0a64n9EsmttmhOsnI6xWi4t7XLdieNU5iOxsmR1vWyWVERplbBtp0KwAKNqlQmvFh1k6R7j4v8Y+Nh4oaAz1dYXsdfBc1dYs09fC9YAu2nr4XrDS/kCmDfwvWIw+FOMCjuUMCipZLJZLJZLJZLJZLJZLJZLJZLiiZ9/J//8QAIxEBAAIBBAMBAQADAAAAAAAAAQAREAIgITEDMEASQTJgcf/aAAgBAwEBPwA+c/065ZLJZLJZLJZLJcG9q0S2Wy2Wy83L2mw2vWa9ZsNrHYS89579b16AuBEIlSsHpY5uXgLZWFynre4YcEOCXg0LER5w+t26SBbRNOgDmP5OifuIaiPDTH1u0niLbYscDPKcXL9bK2E0FBUf+x08XPzxAZq/xbwepw4YTTwEaYcGCiamxwerV3hMM8R+hGBxhGpSHMY9R00c+vVDDGeLVTzBHrHMRlY1tvr1bKlTwsqc/wAY3/XHkeeNxu1S5cM+E4Y6qaYo/wBi8dwbnkPZqxWzw9TXovkn41R0s0FE1i8xlbDdqlSs6S2oAdZalxmuh4g7Dcytg03BsuXBiy5q1BFtxcvB7DUkPLDyEfKR1rL3ae9z8JsrD8J3sWsPwmxJdkT4TvakfhNjctItymUymUymUymUymUymU4pxTDvbcfl/8QAMBAAAQIDBAkFAAMBAQAAAAAAAQACERMwEBJAYQMgITFBUFFikSJxgZKhMkJSBID/2gAIAQEACD8BH/qCKvDyr7fKmN8qazyprPKnMU5qmhTVf/FePherwvWoPVx6luUoqV+qV+qU1XGKDF6R8K/+KappUwp1Fl3Zkrw8Kb+Ke9Tn+VNf5V93lRKjyX25JlRy5J20cuSdvLe3lvaKOeAOE7RRzr8bXQsOAyo54GKjrRqZYcbhqN1I1sqOVUWRUdc2illRyrigKvbRyqcNSFhUEBgMqOVc4XLDnDZUs+W51Wi87oFKT2GKu2udtV9Appjh86rk2OzorjvVuJCgLf1OeyPQlXQPZN2eyzw2dZw2O4p74tbuChv32u3dENFFrzvWiMHcQn86ywvRdKgp5UsqYb60dRsHD/PGz/nZePU7k/UCeNqO8mllSyqf6GobCm6jo+npU7aWVN38UyNrU5/wrybv6p20ddS9timn3p5CllU4E23rqdF/umPcz2RLz8pr4s6HUBqdopZVeNoMCoRTtmo35q9ow7d41CELIpu9O2lCp2DEBHdZFRUdthrduIGF7cSFBQtNvCp24XR7XLeeupC2GrofCdsNLLB71uWVU/CPFRRxEU0Im0/22VHbAEP4DcMS3aidYL+3GlpHAJvp0fTrR3G33qcUaLDArTbCmuB1X6Ro+U2L1ovQE9xJpndZmcQChpXK/H3UsRV+AywPceW93Le/lvfy3u5b7USgeR+1HgEeR9tB3JezlvYaBTUeR9h1yLAQs+R5HXFkCiolXztU1TR4V8K+1RYvQvSoN8q4PKl/qlfqlKSVJKkOUl6kOUh6kP8ACkP8KQ/wpGk8KTpPqpL/AKqS/wCqkv8AqpL/AKqTpPqpL/qpL/qpL/qpOk+quFobtiRSggNvK4qPKf/EACgQAQEBAAMAAgEFAQACAwEAAAEAERAhMUFRYSBxkaGxgTDRweHx8P/aAAgBAQABHhAnAmAJ5xkkWcZZBZZbwf8AgzZNjfHhOUiwmzbwk4U4xggzg3hb+4cHGWRl31yXnU8HAzkfoHhu+Tg4XgOGWvO8EHKaZFLI/QXT+jbf/AcFtv6WOEtEN3xgcPPZZw5L8wcFvGzsi8bZzv6AiTfIfht5TY3lYeE2CI3jP0nDYb6D/ONiYiyN4zx423g42P8Awe+fo885CIf0bLCOc7scB9EPPTdkc5+nOBtiOB/VvBFkcEc7KxwOdbCN50W8LrjY4G7LeHhtjjM8hyON5eT9BDyMcE/pHLp+feZycbxuekvO868HA/qyOQt4F/QTz1bwSzgY/Qxb+jbbeAtLNj9RyDwZwZZZHOXccbbsYcDEWTwHChPqiS9P/iS9P/mQ9/hyXv8AFn5C/wCZP/2cY/PT8H9G/J/nJ/8Awufv/wCa/RwJ+CH4ZfinPx/KvwD/ALX4IfhpTwpf5/Yr8R/wy3yj57NjWni1Vs32DnIhIh0z52I8P9r8p/4J9ke9/Pn0J+7n2P8Au5f1/wB1lPqZVjF82wee7bvgXgZ3q2GWI8ll2GFtCMh4WpY6vkWDjOPfLbAlCP8A1P8ABMZIW5DaNoWlsN35ttseG8DaRklsO269DC27DDKFfZYSFi3g3QsB8wnvobMMIZZA6u+/syj0d3fx8Qttr0eBGt7708b5GR8v6MGCyOpd9+eNDMtlhhtlDMOQjblvfncLJ0+i6ftLYt3hh8tHZXq+6Rba2w2nt1EX5HbYzwYbc7CEtL11Zt4O7bb307y2WaENumxt4dOFiFRt1/bRBwyMKvVl8458bGbYfhuvdtbbQti0H9+SGW2G3hyGMlGGN77tlrm5GxHfDq6JYSI9En/Cg71teA4DJy8x7X7ynd2GhbL7C+F848C+L5EWrEQyWyQnOjMsRsyuwnYhhx7YWGG2Hsun4/8AAiIF4Xg3ltfoONJWFZwhnfjzONeobbrZQxafD7diwJK4eFsUAhcEyy+fMOlrGrqx4aRBCfc04GQQnhdQmNvBz8X+BwW2NhmEMt3GDv8AR4Xq17PJ31YtHjbdlkO5ehn7xBF1qbnyXp7vMcPykgMK/J7J5HDemdraekrrYXG2GQqmGvh8SkhSXRaQ9kIJ13afLaLZHxrdTPA26a22u7CkI+9RCnSSjqe4LbRtfdhZZ7e/2mYH1g4F9IbWHr0fvKpTq99w/DSC4qIHwpIPYku0h8ZbqODPbVyzxf42buezpl2XU2UsLDDFvBwTwJ/RESMIXvkE9aWwtvxBEZO7Mfk8nr3tgdeDeBtPGHO1l0N6DJZukti+Hs4YCJ19MPS4J2fGzCwpiPkoDpBfd2QAuSDUNHtyANGHWHM7GUyGGGB6hhyCG/B/wtiGRYMiYZbFCEOFvLtFkB3PRmbASwO+Z67EdHReoQkdD39HTOu8w7PwxotgYuOJIJyGu/GXgmnUAc9CA0sH0bXIbSGWQxb4DeeSe73P+EMPBZYhPHv+9lfTu17xodF23htvBb8rttrY4vQwr0sI93LI7FvT4ywPhCeD3KIiG9sy3zYx6xNvTPj4i50YkgoukpZUz5Jjh98AQ5KGFXr5hlv7b/CGMhuuBJ4AyfNTqZAnvzY2bGkqwz8K/i20ke/UXW9OiNArg9xByyckGE8ad3chaducFnc/0g9sfEfmQ6N+O4GsH8JG+HxFd6de2UthhhSFhS9wlhfif0RBnJEsIL+dw4GW29YWw2mLGHptoZaWzKPc6vUP+zvDfGyR3vcQWBCC6NYHgWSTH8En6xnW2syd+mWzxdTyUkTZQpbDasPl2/b/AOEcbwcbMd/KMgL+7wMxkpb16dSqOSvhCJZYv5ZbNfOFEAjhGGZMvHaM3bs5MMfR8tZIsfb1ka5JUjpI4XB6bfC+R1/zgth4WMbEdZAC+kf3LG8LbF1jI6HsRKjwph8/EJ7IIRIeEjEhWyQes6dJn3DMPyMLdUm+MEcCDS+0I4foD+rQhi27lGLDDtdHnj/2B+X8xnCQPewJBAyg1+DWdV6u2wb/AAgasNKA7hhPDUCURCj73CdX26no/LE+3qgDB9hpySIj53LQ/ZHguQ39g/2Ho/ghGILbY1uyWTqOH+dmSw27eewQZ8dPcxwB2jI6jFun8z7ATtYogg6h1CL0I0LRS0jke6HTCFoI4p1OxN+/BP4SPGSnoVoxA9nz02x+rF3Mwm+wABDkIhn3fklv5A/yIbd4x9bJZj2hg/m2lpbAaTAQznGAPF0gtC/lgYbJeKPtdg1v0pOBDy+F4ccFjhQ5g8YV+2Z1z4ZhAA/FsgNQyf8A7kj49cBR+O4b2kPgHkuAw50W3od+Sxr+D/P0HLnjMu2WTiDjUlMKwvyyxdnzOkO7M8TT2AwTwIeEgYbaetq9YO6h1ZPCGZwCSQ1RhC7sKyjS35IkaX9V/kawQcdFnAj03Scus4SA8bCGTYujBoif/LNer+rehCYRkk7V3I3piGEFhYCL7jk2Q1WWNmZ6MA6DzgQSwjHgi/rP8hOXgklu4x/6izSwkkLAtjYzg9wbGlwees3qjdAcS9LZlL0+IHdxPR9LrkT3rFpsCAIeb8jLZDM/Ibb17J8PtL/PQXWYwkZEJ7bDHl7Px/whhthtjZtg6br+42Sdsm+We7OiEwB7uwwHAjPQz/sbH7F/NkDxGhivULGCL9uNrmAZmPsF6A9lt7NivtnbsER9DNHgD2+rMXpsEkZEREXhst/Yf4QWQp0n6t7tfvVdEjf2ZmHZIMZfbdzr8QJbgbC7wD7ZAWaVwIlduQFSZmIDGuCnDhoizInQ76jxH3y2Pem0JNY7bdP8xaweq2bDGx29vBDsPrLfz/5EcE228rs2x6LaWngy2cLHbDKb4xPYhV6CfvHgj8SmT3mEvq296GtpUI+q7nF+JK/tdd2ze/fIAPU7+gtKxvuYMqgF16c2VdlYW3SGGGGCIVEb/wDgfRHHZ53Flqw9S4SFXs/KZdcdMl55a6FitsO+whCQTxEbYvMHf5IPRzGGghaVx8S84Hw3ZgEgRFdm5RUxiIvkYxyvo8Jfg4Nt8txhhhhhhmv/APV0Q27FvAJLLk+m/ovHpKbueW9s5MDZhjD2GGpp6+QQf4PssE3pXEZ0Heu5qh6QeA3YAOA+0Ab1Znu+izSNE3fnuQMGBDLUYcIepYdhY0hiLtJkOew77xkZJMNV0sDUkhMiSZHXYEDYc2VZgWCtJ/cH3x3am15GffaxQ1nhlYaWtv8AdFnPqsIz8jOVjrZ7p0QTLqF3thiCC/reQfRhnSDJ3yRZMuknWikxl7q8Haj8Xnpshs5AQXl97iIsY8PbK5YOl+ZILsWEqvanspb2DCeGaWcJmsdtjlmE7K359h2E2GLb9jwcdTDxswGyyfJL8DsOjwEmJllt21DF7ajYQYM0vZqemoSGSgPZv0Wo6iAA+CBEaPU2oa/HiGeEMwgwEX87DePHzYXchu/7Tg4Jgzl25CHTLRPbpBZGG4yPsSFhZu/OQB2yDKB6Ob8EQiq9v5R6FgwPZ0zp3EtjvYs/aggHkg6LaAMTRjn19XCpHBxH4YzgwMcBHsWnFNOBmJY7LMwLobUiZbwu+sJK2ygVwPtgM1X0W6Dh+D1nZ9BCNCOTmOOJRwBJdo8NL4ZzPyfhmwqVtoOn09lt4y7cRhjSM8YNggu/6MJdct+SV8sbLEZb/wB5ZnwSluykOOvV7Gn6O5/QH5e2W1n/ADhI2eDAKFhkCJxRZjgCbtFVAC1V8J8Ou5S1Te2TYCNHdy6tNP7srHH6Yx7WAzo47v8AbBnA5Cx3ra2ozdTdkF6t7tAVQD5bryL7+CZ7M+jzghzhhLIiInw3ZhgAwE2T6WUxI2XZ2KwOng+s07/H8oku2zDd+7Ge55fKaF0ewDjt+7wyQt6TPiCnvewj02CzPsS7/ey0N3wvZ7+k9qw+jyWLeSYj7SsH97+IEhP0jAbCQ8HQs+4jbom/4LrwWpavldl4d420g+vG8cYPNmIC7FQbb8UbY2B67dZBFuoWfgycZa/vZ7y+E7r17t/RtsZa8GcLdh+zlkBc/LfCvxp+99jW3x1J9VVfVdZT3rFtvCIE33pBsQQecAe2PZXoy7/ihLYmjPGw3GVhcEBL+zZhe3tllt/SPA8mcBIxwJD9dMvGvGcZkduJDa+dAx10wCScKfHxb/8AWG2G2Y1bnB7ew/lmUvxLbDz3wcLDFll+cnktvknjOrr2NLqOkjpSCMgI0bv+GZxsLasDgrdzbCn3fzN3++8bxuc7bDGwrMMMMI8dcPHfBkA8fOnyQ7JJen49JPWz38c7Pbdi1mLhPchy7J9S7q6/fcvG2wrDbF55wR5DLwZyXWmkFnDnBsfD7G2AGvl14Q3iN9An/wAhC9PDd+LO8DwXYMZtEu/3M+8bnCxxvBwRjCTlvAnBGHnl+ciJ4I+nqfs7s9udXxsQ4H2sP/u8P5iY6Q2y5a2wTXwJ7Pr58ZDoQPoD7WR7mLLNtscl3DHBwxlvG7G/PxDHGTyO8G6n4viHeSwggT7P4uXe3ZDw7A1OyJh8e4CEemN9dECAKHF6Z/QRwcBxkMEZFm8b8eZ+nvxbtmyFPYcUfGHolOgvu/tHqkTz8gl4IGyAghjOxiD2Mb5kMGb+QtkR4df1bbyRbDHDZBxkRERG2Hv3ZB79kab1151MLuqfVkj/AB/kQb03hnEXwCfX90Ji2eG4nnZIh89H7JVhDEUzc/SRwcfjI4C/G8EWcHgnGLBdtk2bL12+dXztkOtWXOmGmsG6/l/2JB2HONtsEIk/AOlpvYnoEFJeSIeCzjM6f1ZnGEEEcA+3nRwYzIF6e45HmP72K9kYjGjuSz93A+6W7wmeOlidKvkAwj8JrLBS3ZeEY5I4yOQsPSCyCCzrIB4D8dMh5Y2emSeE/wCdQbdTZBnwaRwFj+ezbXMt4WLNcyb1XgE06E0Mp+dl7o9dYRtkx+k+mP0X9N/XX5J+C/RV/wDU0+Afxj/8Gz9/uX1fyE1/fH1Uwn/00X8Pf5cfP/Lv/wBjf/rL/wClVj7/AD76f5V9v8qP/tEL5/Kj3f5UfP8Azo+X+ZHfv114bSxkZUHTstIxkJKYnRe4dbJajB9yM+oED4CATczYI0EB6kQIHpAgRMQbMggPAIoIgMsxctiCWWfSBYbILOCbbwkY9e7H1kAq5Aem8oMSQdVM/mOEPchjsd4EBpsBBGceexAkY7EB7BENhBYWEA2HiwDZBDDOdN0eX1lnGwlpK3//xAAiEAACAQIFBQAAAAAAAAAAAAABEQBQYBAhMICQIDFBYXD/2gAIAQEAHz8Q5D3pKzzTBpvYI6cT4E7dWcYorwOLiMPo/AiDVWbVR2ZZ3Mhxx//Z" alt="Jeet Beniwal" style="width:100%; height:100%; object-fit:cover; object-position:center 10%; display:block;" />
+            </div>
+          </div>
+        </div>
+        <!-- Online indicator -->
+        <div style="position:absolute; bottom:18px; right:18px; width:18px; height:18px; border-radius:50%; background:#5de0b8; border:3px solid #0a0a0f; box-shadow:0 0 10px rgba(93,224,184,0.7);"></div>
+      </div>
+    </div>
+    <div class="about-text">
+      <p>I'm a Lead Engineer based in Gurugram, India — passionate about building things that scale. With 8+ years of experience, I've taken systems from zero to production handling millions of users.</p>
+      <p>My core strength is backend architecture — Node.js, TypeScript, Kafka, Redis, and microservices. I've shipped real-money gaming platforms, AI videobot infrastructure, and enterprise iPaaS solutions.</p>
+      <p>Beyond the code, I enjoy mentoring engineers, leading cross-functional teams, and bridging the gap between technical complexity and product goals.</p>
+      <ul class="contact-list">
+        <li>
+          <a href="mailto:jeetbeniwal231@gmail.com">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            jeetbeniwal231@gmail.com
+          </a>
+        </li>
+        <li>
+          <a href="tel:+919872548160">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 7.19 19.79 19.79 0 01.21 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.1a16 16 0 006 6l.86-.86a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </span>
+            +91 98725 48160
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/jeet-beniwal-3934aa10a/" target="_blank">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </span>
+            linkedin.com/in/jeet-beniwal-3934aa10a
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/sportsheros" target="_blank">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            </span>
+            github.com/sportsheros
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            Gurugram, Haryana, India
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag">02 — Skills</div>
+  <div class="section-title">Technical expertise</div>
+  <div class="skills-grid">
+    <div class="skill-category">Languages & Frameworks</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#f7c948"></span>JavaScript</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#3178c6"></span>TypeScript</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#68a063"></span>Node.js</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#c8103e"></span>NestJS</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#e44c26"></span>Express.js</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#61dafb"></span>React.js</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#ff6b6b"></span>React Query</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#5de0b8"></span>Socket.IO</div>
+
+    <div class="skill-category">Databases & Messaging</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#47a248"></span>MongoDB</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#336791"></span>PostgreSQL</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#00758f"></span>MySQL</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#dc382d"></span>Redis</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#231f20"></span>Kafka</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#5a29e4"></span>Prisma ORM</div>
+
+    <div class="skill-category">Cloud, DevOps & Architecture</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#ff9900"></span>AWS (S3, SQS)</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#2496ed"></span>Docker</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#fc6d26"></span>GitLab / CI/CD</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#7c6ef2"></span>Microservices</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#f0845a"></span>REST APIs</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#dc382d"></span>System Design</div>
+
+    <div class="skill-category">Leadership & Process</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#aaa"></span>Team Leadership</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#aaa"></span>Code Review</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#aaa"></span>Agile / Scrum</div>
+    <div class="skill-chip"><span class="skill-dot" style="background:#aaa"></span>Mentorship</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-tag">03 — Experience</div>
+  <div class="section-title">Work history</div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-role">Lead Engineer</div>
+          <div class="timeline-company">Kellton (PokerJam)</div>
+        </div>
+        <div class="timeline-date">Oct 2022 — Present</div>
+      </div>
+      <div class="timeline-body">
+        Led backend development of a real-money gaming platform. Architected microservices, implemented real-time matchmaking, integrated payment gateways, and managed a team of 10 engineers. Served as Scrum Master driving agile delivery.
+      </div>
+      <div class="timeline-tags">
+        <span class="tag">Node.js</span><span class="tag">Kafka</span><span class="tag">Redis</span><span class="tag">MongoDB</span><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Socket.IO</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background: var(--accent2);"></div>
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-role">Node.js Developer</div>
+          <div class="timeline-company">Expertrons</div>
+        </div>
+        <div class="timeline-date">Aug 2021 — Oct 2022</div>
+      </div>
+      <div class="timeline-body">
+        Built scalable APIs for an AI Videobot platform. Implemented real-time features with WebSocket/Socket.io, designed MongoDB architecture for large-scale user interactions, and integrated AI/ML services for intelligent matching.
+      </div>
+      <div class="timeline-tags">
+        <span class="tag">Node.js</span><span class="tag">Socket.io</span><span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background: var(--accent3);"></div>
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-role">MERN Stack Developer</div>
+          <div class="timeline-company">BigData Dimension Labs</div>
+        </div>
+        <div class="timeline-date">Mar 2019 — Jun 2021</div>
+      </div>
+      <div class="timeline-body">
+        Designed and developed comprehensive web applications from scratch. Built dynamic frontend with React.js and robust backend with Node.js, MySQL, PostgreSQL and Express.js. Implemented secure login and registration systems.
+      </div>
+      <div class="timeline-tags">
+        <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">Express.js</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background: var(--muted2);"></div>
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-role">.NET Developer</div>
+          <div class="timeline-company">Horizon e-Solutions</div>
+        </div>
+        <div class="timeline-date">Feb 2018 — Feb 2019</div>
+      </div>
+      <div class="timeline-body">
+        Developed web applications using multiple engineering languages. Conducted full lifecycle software development from planning to maintenance. Participated actively in agile ceremonies.
+      </div>
+      <div class="timeline-tags">
+        <span class="tag">.NET</span><span class="tag">Agile</span><span class="tag">Testing</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-tag">04 — Projects</div>
+  <div class="section-title">Featured projects</div>
+  <div class="projects-grid">
+
+    <div class="project-card featured">
+      <div class="project-top">
+        <div class="project-icon" style="background:rgba(124,110,242,0.12)">🃏</div>
+        <div class="project-num">01 / FEATURED</div>
+      </div>
+      <div class="project-title">PokerJam — B2C Gaming Platform</div>
+      <div class="project-role">Lead Backend Engineer · Oct 2022 – Jan 2025</div>
+      <div class="project-desc">Led backend development of a comprehensive real-money gaming platform. Architected scalable services handling massive concurrent users, built secure player wallet management with fraud prevention, implemented real-time matchmaking algorithms, and managed the complete CI/CD pipeline. APIs handle millions of daily requests with P95 latency under 300ms.</div>
+      <div class="project-stack">
+        <span class="stack-badge">Node.js</span>
+        <span class="stack-badge">Kafka</span>
+        <span class="stack-badge">Redis</span>
+        <span class="stack-badge">MongoDB</span>
+        <span class="stack-badge">Docker</span>
+        <span class="stack-badge">AWS</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon" style="background:rgba(93,224,184,0.12)">🔗</div>
+        <div class="project-num">02</div>
+      </div>
+      <div class="project-title">Americana — iPaaS Platform</div>
+      <div class="project-role">Backend Engineer</div>
+      <div class="project-desc">Built an Integration Platform as a Service enabling seamless data integration and workflow automation across enterprise systems. Designed Kafka-based streaming, Redis caching, and multi-tenant architecture with role-based access controls.</div>
+      <div class="project-stack">
+        <span class="stack-badge">Node.js</span>
+        <span class="stack-badge">Kafka</span>
+        <span class="stack-badge">PostgreSQL</span>
+        <span class="stack-badge">AWS</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon" style="background:rgba(240,132,90,0.12)">🤖</div>
+        <div class="project-num">03</div>
+      </div>
+      <div class="project-title">Expertrons — AI Videobot</div>
+      <div class="project-role">Backend Engineer · Aug 2021 – Oct 2022</div>
+      <div class="project-desc">Backend infrastructure for the world's largest AI Videobot platform. Supported 5,000+ concurrent users with &lt;100ms response times. Processed 10,000+ daily video sessions at 99.9% uptime across 50+ institutions.</div>
+      <div class="project-stack">
+        <span class="stack-badge">Node.js</span>
+        <span class="stack-badge">WebSocket</span>
+        <span class="stack-badge">MongoDB</span>
+        <span class="stack-badge">Docker</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon" style="background:rgba(124,110,242,0.08)">📊</div>
+        <div class="project-num">04</div>
+      </div>
+      <div class="project-title">Sales Genie — Sales Management</div>
+      <div class="project-role">Software Developer · Mar 2019 – Jun 2021</div>
+      <div class="project-desc">Developed a comprehensive sales management platform giving managers real-time visibility into field rep activities. Built dashboards, customer visit tracking, and mobile-friendly interfaces for on-the-go reporting.</div>
+      <div class="project-stack">
+        <span class="stack-badge">React.js</span>
+        <span class="stack-badge">Node.js</span>
+        <span class="stack-badge">MySQL</span>
+        <span class="stack-badge">Express.js</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section>
+  <div class="section-tag">05 — Impact</div>
+  <div class="section-title">Impact by numbers</div>
+  <div class="achievements">
+    <div class="achieve-card">
+      <div class="achieve-num">&lt;300ms</div>
+      <h4>API Performance</h4>
+      <p>P95 latency on APIs handling millions of daily requests</p>
+    </div>
+    <div class="achieve-card">
+      <div class="achieve-num">10</div>
+      <h4>Team Leadership</h4>
+      <p>Engineers managed across backend and frontend teams</p>
+    </div>
+    <div class="achieve-card">
+      <div class="achieve-num">5,000+</div>
+      <h4>Concurrent Users</h4>
+      <p>Supported simultaneously on the AI Videobot platform</p>
+    </div>
+    <div class="achieve-card">
+      <div class="achieve-num">99.9%</div>
+      <h4>Uptime</h4>
+      <p>Achieved on the Expertrons platform with 10K+ daily sessions</p>
+    </div>
+    <div class="achieve-card">
+      <div class="achieve-num">50+</div>
+      <h4>Integrations</h4>
+      <p>Educational institutions and businesses onboarded</p>
+    </div>
+    <div class="achieve-card">
+      <div class="achieve-num">&lt;100ms</div>
+      <h4>Videobot Response</h4>
+      <p>Real-time response time for AI-powered interactions</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-tag">06 — Education</div>
+  <div class="section-title">Academic background</div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">Master of Computer Applications (MCA)</div>
+      <div class="edu-school">Chandigarh University</div>
+      <div class="edu-year">Aug 2015 – Dec 2017</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+      <div class="edu-school">Maharshi Dayanand University</div>
+      <div class="edu-year">Aug 2011 – Dec 2014</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <p>✦ Open to senior &amp; lead engineering roles · <a href="mailto:jeetbeniwal231@gmail.com">jeetbeniwal231@gmail.com</a> · Gurugram, India</p>
+  <p style="margin-top: 8px;">© 2025 Jeet Beniwal</p>
+</footer>
+
+</body>
+</html>
