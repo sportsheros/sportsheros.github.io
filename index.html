@@ -234,14 +234,62 @@
   @media (max-width: 768px) {
     nav { padding: 0 1.25rem; }
     .nav-links { display: none; }
-    .hero { padding: 6rem 1.25rem 3rem; }
-    .hero-stats { gap: 1.5rem; }
-    section { padding: 4rem 1.25rem; }
-    .about-grid { grid-template-columns: 1fr; }
-    .about-photo-placeholder { aspect-ratio: 1; max-height: 280px; }
-    .projects-grid { grid-template-columns: 1fr; }
+    .nav-logo { font-size: 1rem; }
+
+    /* HERO mobile */
+    .hero { padding: 5.5rem 1.25rem 2.5rem; min-height: auto; }
+    .hero h1 { font-size: clamp(2.4rem, 12vw, 3.5rem); }
+    .hero-sub { font-size: 0.95rem; margin-bottom: 1.75rem; }
+    .hero-cta { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+    .hero-cta .btn { justify-content: center; padding: 0.9rem 1.5rem; font-size: 14px; }
+    .hero-stats { gap: 1.2rem; margin-top: 2.5rem; flex-wrap: wrap; }
+    .stat-num { font-size: 1.5rem; }
+    .stat-label { font-size: 11px; }
+
+    /* SECTIONS mobile */
+    section { padding: 3rem 1.25rem; }
+    .section-title { font-size: 1.6rem; margin-bottom: 1.75rem; }
+
+    /* ABOUT mobile */
+    .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .about-photo-wrapper { padding: 0.5rem 0; }
+    .about-photo-wrapper > div { transform: scale(0.85); }
+    .about-text p { font-size: 14px; }
+    .contact-list li a { font-size: 13px; }
+
+    /* SKILLS mobile */
+    .skills-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+    .skill-chip { font-size: 12px; padding: 0.6rem 0.75rem; }
+
+    /* TIMELINE mobile */
+    .timeline { padding-left: 1.5rem; }
+    .timeline-dot { left: -1.5rem; }
+    .timeline-role { font-size: 0.95rem; }
+    .timeline-body { font-size: 13px; }
+
+    /* PROJECTS mobile */
+    .projects-grid { grid-template-columns: 1fr; gap: 1rem; }
     .project-card.featured { grid-column: span 1; }
+    .project-title { font-size: 1rem; }
+    .project-desc { font-size: 12px; }
+
+    /* ACHIEVEMENTS mobile */
+    .achievements { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .achieve-num { font-size: 1.4rem; }
+    .achieve-card { padding: 1rem; }
+
+    /* EDUCATION mobile */
     .edu-grid { grid-template-columns: 1fr; }
+
+    /* FOOTER mobile */
+    footer { padding: 2rem 1.25rem; font-size: 12px; }
+  }
+
+  @media (max-width: 420px) {
+    .hero h1 { font-size: 2.2rem; }
+    .hero-stats { gap: 1rem; }
+    .achievements { grid-template-columns: 1fr; }
+    .about-photo-wrapper > div { transform: scale(0.75); }
   }
 </style>
 </head>
@@ -421,10 +469,10 @@
         <div class="timeline-date">Oct 2022 — Present</div>
       </div>
       <div class="timeline-body">
-        Led backend development of a real-money gaming platform. Architected microservices, implemented real-time matchmaking, integrated payment gateways, and managed a team of 10 engineers. Served as Scrum Master driving agile delivery.
+        Led backend development across 3 major products at Kellton as Lead Engineer &amp; Scrum Master. Architected microservices, built real-time systems, integrated payment gateways, and managed a cross-functional team of 10 engineers through full product lifecycles.
       </div>
       <div class="timeline-tags">
-        <span class="tag">Node.js</span><span class="tag">Kafka</span><span class="tag">Redis</span><span class="tag">MongoDB</span><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Socket.IO</span>
+        <span class="tag">Node.js</span><span class="tag">NestJS</span><span class="tag">Kafka</span><span class="tag">Redis</span><span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Socket.IO</span>
       </div>
     </div>
 
@@ -472,10 +520,10 @@
         <div class="timeline-date">Feb 2018 — Feb 2019</div>
       </div>
       <div class="timeline-body">
-        Developed web applications using multiple engineering languages. Conducted full lifecycle software development from planning to maintenance. Participated actively in agile ceremonies.
+        Built 3 end-to-end .NET projects: a dynamic school website, a university portal, and a desktop application for automated result &amp; marksheet generation. Handled full software lifecycle from planning through deployment.
       </div>
       <div class="timeline-tags">
-        <span class="tag">.NET</span><span class="tag">Agile</span><span class="tag">Testing</span>
+        <span class="tag">.NET</span><span class="tag">C#</span><span class="tag">SQL Server</span><span class="tag">WinForms</span><span class="tag">ASP.NET</span>
       </div>
     </div>
 
@@ -488,23 +536,20 @@
 <section id="projects">
   <div class="section-tag">04 — Projects</div>
   <div class="section-title">Featured projects</div>
-  <div class="projects-grid">
+  <!-- KELLTON -->
+  <div class="project-group-label" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:1rem;">Kellton · 2022 – Present</div>
+  <div class="projects-grid" style="margin-bottom:2.5rem;">
 
     <div class="project-card featured">
       <div class="project-top">
         <div class="project-icon" style="background:rgba(124,110,242,0.12)">🃏</div>
         <div class="project-num">01 / FEATURED</div>
       </div>
-      <div class="project-title">PokerJam — B2C Gaming Platform</div>
+      <div class="project-title">PokerJam — Real-Money Gaming Platform</div>
       <div class="project-role">Lead Backend Engineer · Oct 2022 – Jan 2025</div>
-      <div class="project-desc">Led backend development of a comprehensive real-money gaming platform. Architected scalable services handling massive concurrent users, built secure player wallet management with fraud prevention, implemented real-time matchmaking algorithms, and managed the complete CI/CD pipeline. APIs handle millions of daily requests with P95 latency under 300ms.</div>
+      <div class="project-desc">Led backend development of a B2C real-money gaming platform. Architected microservices handling massive concurrent users, built secure player wallet management with fraud prevention, implemented real-time matchmaking algorithms, and owned the full CI/CD pipeline. APIs handle millions of daily requests with P95 latency consistently under 300ms.</div>
       <div class="project-stack">
-        <span class="stack-badge">Node.js</span>
-        <span class="stack-badge">Kafka</span>
-        <span class="stack-badge">Redis</span>
-        <span class="stack-badge">MongoDB</span>
-        <span class="stack-badge">Docker</span>
-        <span class="stack-badge">AWS</span>
+        <span class="stack-badge">Node.js</span><span class="stack-badge">Kafka</span><span class="stack-badge">Redis</span><span class="stack-badge">MongoDB</span><span class="stack-badge">Docker</span><span class="stack-badge">AWS</span><span class="stack-badge">Socket.IO</span>
       </div>
     </div>
 
@@ -513,51 +558,111 @@
         <div class="project-icon" style="background:rgba(93,224,184,0.12)">🔗</div>
         <div class="project-num">02</div>
       </div>
-      <div class="project-title">Americana — iPaaS Platform</div>
-      <div class="project-role">Backend Engineer</div>
-      <div class="project-desc">Built an Integration Platform as a Service enabling seamless data integration and workflow automation across enterprise systems. Designed Kafka-based streaming, Redis caching, and multi-tenant architecture with role-based access controls.</div>
+      <div class="project-title">PulseBridge — iPaaS Integration Platform</div>
+      <div class="project-role">Backend Engineer · Kellton</div>
+      <div class="project-desc">Built a comprehensive Integration Platform as a Service enabling seamless data integration and workflow automation across enterprise systems. Designed Kafka-based streaming services, Redis state caching, and multi-tenant architecture with role-based access controls and full audit logging. Processed thousands of integration jobs daily with high reliability.</div>
       <div class="project-stack">
-        <span class="stack-badge">Node.js</span>
-        <span class="stack-badge">Kafka</span>
-        <span class="stack-badge">PostgreSQL</span>
-        <span class="stack-badge">AWS</span>
+        <span class="stack-badge">Node.js</span><span class="stack-badge">Kafka</span><span class="stack-badge">PostgreSQL</span><span class="stack-badge">Redis</span><span class="stack-badge">AWS</span><span class="stack-badge">Docker</span>
       </div>
     </div>
 
     <div class="project-card">
       <div class="project-top">
-        <div class="project-icon" style="background:rgba(240,132,90,0.12)">🤖</div>
+        <div class="project-icon" style="background:rgba(93,224,184,0.12)">📄</div>
         <div class="project-num">03</div>
       </div>
-      <div class="project-title">Expertrons — AI Videobot</div>
-      <div class="project-role">Backend Engineer · Aug 2021 – Oct 2022</div>
-      <div class="project-desc">Backend infrastructure for the world's largest AI Videobot platform. Supported 5,000+ concurrent users with &lt;100ms response times. Processed 10,000+ daily video sessions at 99.9% uptime across 50+ institutions.</div>
+      <div class="project-title">IDP — Internal Document Processing</div>
+      <div class="project-role">Backend Engineer · Kellton</div>
+      <div class="project-desc">Architected an end-to-end document processing backend using NestJS. Built a queue-based async pipeline via AWS SQS for high-volume document ingestion, integrated third-party AI/ML APIs for automated classification &amp; data extraction, and engineered a secure post-processing deletion workflow for compliance. Redis used for job deduplication and state caching across SQS consumers.</div>
       <div class="project-stack">
-        <span class="stack-badge">Node.js</span>
-        <span class="stack-badge">WebSocket</span>
-        <span class="stack-badge">MongoDB</span>
-        <span class="stack-badge">Docker</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-top">
-        <div class="project-icon" style="background:rgba(124,110,242,0.08)">📊</div>
-        <div class="project-num">04</div>
-      </div>
-      <div class="project-title">Sales Genie — Sales Management</div>
-      <div class="project-role">Software Developer · Mar 2019 – Jun 2021</div>
-      <div class="project-desc">Developed a comprehensive sales management platform giving managers real-time visibility into field rep activities. Built dashboards, customer visit tracking, and mobile-friendly interfaces for on-the-go reporting.</div>
-      <div class="project-stack">
-        <span class="stack-badge">React.js</span>
-        <span class="stack-badge">Node.js</span>
-        <span class="stack-badge">MySQL</span>
-        <span class="stack-badge">Express.js</span>
+        <span class="stack-badge">NestJS</span><span class="stack-badge">PostgreSQL</span><span class="stack-badge">AWS SQS</span><span class="stack-badge">Redis</span><span class="stack-badge">AI/ML API</span>
       </div>
     </div>
 
   </div>
-</section>
+
+  <!-- EXPERTRONS -->
+  <div class="project-group-label" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-bottom:1rem;">Expertrons · 2021 – 2022</div>
+  <div class="projects-grid" style="margin-bottom:2.5rem;">
+
+    <div class="project-card featured">
+      <div class="project-top">
+        <div class="project-icon" style="background:rgba(240,132,90,0.12)">🤖</div>
+        <div class="project-num">04</div>
+      </div>
+      <div class="project-title">Expertrons — AI Videobot Platform</div>
+      <div class="project-role">Node.js Backend Engineer · Aug 2021 – Oct 2022</div>
+      <div class="project-desc">Built backend infrastructure for the world's largest AI Videobot Technology platform — providing hiring &amp; placement solutions for businesses and career guidance for consumers. Developed scalable APIs for AI-powered videobot interactions, implemented real-time communication via WebSocket/Socket.io, designed MongoDB architecture for large-scale interactions, and integrated AI/ML services for intelligent videobot responses. Supported 5,000+ concurrent users, achieved &lt;100ms response time, processed 10,000+ daily video sessions at 99.9% uptime, and onboarded 50+ institutions.</div>
+      <div class="project-stack">
+        <span class="stack-badge">Node.js</span><span class="stack-badge">Socket.IO</span><span class="stack-badge">MongoDB</span><span class="stack-badge">PostgreSQL</span><span class="stack-badge">Kafka</span><span class="stack-badge">Docker</span><span class="stack-badge">AWS</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BIGDATA DIMENSION LABS -->
+  <div class="project-group-label" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:1rem;">BigData Dimension Labs · 2019 – 2021</div>
+  <div class="projects-grid" style="margin-bottom:2.5rem;">
+
+    <div class="project-card featured">
+      <div class="project-top">
+        <div class="project-icon" style="background:rgba(124,110,242,0.08)">📊</div>
+        <div class="project-num">05</div>
+      </div>
+      <div class="project-title">Sales Genie — Field Sales Management Platform</div>
+      <div class="project-role">MERN Stack Developer · Mar 2019 – Jun 2021</div>
+      <div class="project-desc">Developed a comprehensive sales management platform bridging the gap between field sales representatives and management. Built real-time activity tracking, customer visit logging, performance dashboards, order management, and mobile-friendly interfaces for on-the-go reporting. Enabled data-driven decisions with actionable analytics, giving managers instant visibility into field rep activities.</div>
+      <div class="project-stack">
+        <span class="stack-badge">React.js</span><span class="stack-badge">Node.js</span><span class="stack-badge">MySQL</span><span class="stack-badge">PostgreSQL</span><span class="stack-badge">Express.js</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HORIZON E-SOLUTIONS -->
+  <div class="project-group-label" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent3);font-weight:500;margin-bottom:1rem;">Horizon e-Solutions · 2018 – 2019</div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon" style="background:rgba(240,132,90,0.1)">🏫</div>
+        <div class="project-num">06</div>
+      </div>
+      <div class="project-title">School Dynamic Website</div>
+      <div class="project-role">.NET Developer</div>
+      <div class="project-desc">Built a fully dynamic school website with a CMS-style admin panel. Staff can manage news, events, notices, and student info. Implemented role-based access for admin, teachers, and students with a clean public-facing frontend.</div>
+      <div class="project-stack">
+        <span class="stack-badge">ASP.NET</span><span class="stack-badge">C#</span><span class="stack-badge">SQL Server</span><span class="stack-badge">HTML/CSS</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon" style="background:rgba(240,132,90,0.1)">🎓</div>
+        <div class="project-num">07</div>
+      </div>
+      <div class="project-title">University Portal Website</div>
+      <div class="project-role">.NET Developer</div>
+      <div class="project-desc">Developed a university web portal covering course listings, faculty profiles, admission enquiries, and department management. Integrated a student login system with academic record views and announcement feeds.</div>
+      <div class="project-stack">
+        <span class="stack-badge">ASP.NET</span><span class="stack-badge">C#</span><span class="stack-badge">SQL Server</span><span class="stack-badge">Bootstrap</span>
+      </div>
+    </div>
+
+    <div class="project-card featured">
+      <div class="project-top">
+        <div class="project-icon" style="background:rgba(240,132,90,0.1)">🖥️</div>
+        <div class="project-num">08</div>
+      </div>
+      <div class="project-title">Result &amp; Marksheet Generator — Desktop App</div>
+      <div class="project-role">.NET Developer · WinForms Desktop Application</div>
+      <div class="project-desc">Built a standalone Windows desktop application for automated university result processing and marksheet generation. The system ingested student subject marks, applied grading logic, calculated totals, percentages, and grade points, and generated print-ready marksheet PDFs. Supported bulk processing of entire batches, drastically reducing manual effort for the examination department.</div>
+      <div class="project-stack">
+        <span class="stack-badge">C#</span><span class="stack-badge">WinForms</span><span class="stack-badge">SQL Server</span><span class="stack-badge">Crystal Reports</span><span class="stack-badge">.NET Framework</span>
+      </div>
+    </div>
+
+  </div>
 
 <div class="section-divider"></div>
 
